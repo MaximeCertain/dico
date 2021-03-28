@@ -1,0 +1,43 @@
+
+.input-container {
+  width: 300px;
+  position: relative;
+
+  input {
+    width: 100%;
+    border: 1px solid #485665;
+    position: relative;
+    background: none;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    padding: 8px 12px;
+    outline: 0;
+
+    &:focus {
+      border-color: aqua;
+
+      & + label {
+        background: #f06d06;
+        color: white;
+        font-size: 70%;
+        top: 25px;
+        width: 100%;
+        padding: 1px 6px;
+        z-index: 2;
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  label {
+    position: absolute;
+    color: #999;
+    padding: 7px 6px;
+    transition: background 0.2s, color 0.2s, top 0.2s, bottom 0.2s, right 0.2s, left 0.2s;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+}

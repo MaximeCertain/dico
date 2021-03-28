@@ -1,36 +1,42 @@
-import {ChangeEvent, FC, FormEvent, useState} from "react";
-import {firebase_app} from "../../firebase/firebase.config"
+import {ChangeEvent, FC, useState} from "react";
+import {login, logout} from "../actions/auth";
+import {useDispatch, useSelector} from "react-redux";
 
 const Login: FC = () => {
 
-    const [login, setLogin] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const dispatch = useDispatch();
+    const {isLoggedIn} = useSelector((state: any) => state.auth);
 
     const handleChange =
         (e: ChangeEvent<HTMLInputElement>) => {
             const value = e.target.value;
-            e.target.name === "username" ? setLogin(value) : setPassword(value);
-            console.log(login + password)
+            e.target.name === "username" ? setUsername(value) : setPassword(value);
+            console.log(username + password)
         }
 
     const log = async () => {
-        await firebase_app
-            .auth()
-            .signInWithEmailAndPassword(login, password);
+        await dispatch(login(username, password));
+    }
+    const logout_user = () => {
+        dispatch(logout())
 
-        await firebase_app.auth().onAuthStateChanged((user) => {
-            if (user) {
-                console.log(user)
-            }
-        });
     }
 
+    console.log(isLoggedIn);
     return (
-        <div>
-            <input name={"username"} onChange={handleChange}/>
-            <input name={"password"} onChange={handleChange}/>
-            <button onClick={log}>Login</button>
-        </div>)
+        <>
+            {!isLoggedIn && <>
+                <input name={"username"} onChange={handleChange}/>
+                <input name={"password"} onChange={handleChange}/>
+                <button onClick={log}>Login</button>
+            </>}
+
+            {isLoggedIn && <button onClick={logout_user}>Logout</button>}
+
+        </>
+    )
 
 }
 
