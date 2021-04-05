@@ -5,7 +5,6 @@ import translations from "../reducers/translations";
 
 export const getTranslations = () => (dispatch: any) => {
     return TranslationService.getTranslations().then((response) => {
-
         dispatch({
             type: GET_TRANSLATIONS,
             payload: response

@@ -4,6 +4,7 @@ import './App.css';
 import Login from "./Login/components/Login";
 import AddTranslation from "./Translation/components/AddTranslation";
 import ListTranslation from "./Translation/components/ListTranslation";
+import Quiz from "./Quiz/components/Quiz";
 
 function App() {
     return (
@@ -11,6 +12,9 @@ function App() {
                 <AddTranslation/>
 
                 <ListTranslation/>
+
+                <Quiz/>
+
         </div>
     );
 }
